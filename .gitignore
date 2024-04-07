@@ -6,7 +6,7 @@ data/
 
 # LaTeX files to ignore
 *.bcf
-
+*.xml
 *.aux
 *.bbl
 *.blg
