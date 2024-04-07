@@ -1,0 +1,114 @@
+\documentclass{article}
+\usepackage[margin=2.5cm]{geometry} % Set margins
+\usepackage{graphicx}
+\usepackage[absolute]{textpos} % Enable absolute positioning
+\usepackage{titlesec} % Package for controlling section title appearance
+\usepackage[scaled]{helvet}
+\usepackage[T1]{fontenc}
+\usepackage{fancyhdr}
+
+% Set up hyperref
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    linkbordercolor={0 0 1}
+}
+
+% Set up references
+\usepackage[
+    backend=biber,             % Use biber backend (an external tool)
+    sorting=none,              % Enumerates the reference in order of their appearance
+    style=authoryear           % Choose here your preferred citation style
+]{biblatex}
+\addbibresource{bibliography.bib} % The filename of the bibliography
+\usepackage[autostyle=true]{csquotes} 
+                               % Required to generate language-dependent quotes 
+                               % in the bibliography
+
+\setlength{\TPHorizModule}{1cm} % Set horizontal unit of measure
+\setlength{\TPVertModule}{1cm} % Set vertical unit of measure
+\setlength{\parindent}{0pt}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\makeatletter
+\renewcommand{\maketitle}{
+  \begin{flushleft} 
+    \Large\textmd{\@title} 
+    \par
+  \end{flushleft}
+}
+\makeatother
+
+% Define style of sectiontitles
+\titleformat{\section}
+  {\normalfont\large\mdseries}{\thesection}{1em}{}
+
+% Set up fancyhdr
+\fancyhf{} % Clear all headers and footers
+\renewcommand{\headrulewidth}{0pt} % Remove the header rule
+\rfoot{\thepage} % Place the page number in the right footer
+\pagestyle{fancy}
+
+
+%%%%% Title %%%%%
+\title{NDVI calculation for the Kanton of Schaffhausen using Sentinel-2 data and Python}
+
+\begin{document}
+
+%%%%% Header %%%%%
+\begin{textblock}{1}(2.5,1) % Position 1cm from left and 1cm from top
+        \includegraphics[width=6cm]{logo.jpg} % Add logo
+\end{textblock}
+
+\begin{textblock}{6}(13,1) % Position 14cm from left and 1cm from top
+        \raggedleft
+        Julian Kraft UI22\\
+        Remote Sensing\\
+        \today
+\end{textblock}
+
+\vspace*{1.5cm}
+
+%%%%% Document %%%%%
+
+\maketitle
+
+\section*{Introduction}
+
+The Normalized Difference Vegetation Index (NDVI) is a widely used index to monitor vegetation health and growth. 
+It is calculated from the red and near-infrared bands of satellite imagery. The NDVI values range from -1 to 1, 
+where values close to 1 indicate healthy vegetation and values close to -1 indicate no vegetation. In this report, 
+we calculate the NDVI for the Kanton of Schaffhausen using Sentinel-2 satellite data and Python. To solve this task,
+three different Remote Sensing products are used: Sentinel-2 Level-2A data bands B04 (Red) and B08 (NIR) and the
+preprocessed Scene Classification Layer (SCL). In this report the focus is on how the data was obtained and processed
+and how the created NDVI product looks like for a single time frame.
+
+In next step, namely task 2, the Idea is to analyze the data over time. The NDVI for itself provides limited information
+about the actual vegetation health and growth, since the values are relative. Therefore, the plan is to calculate the 
+deviation from the mean NDVI over the whole time frame for each pixel on every time frame. 
+
+
+\section*{Methods}
+
+To process and download the data, the \href{https://openeo.dataspace.copernicus.eu/}{OpenEO} platform was used. There is a
+great advantage in using platforms like this, since they provide a lot of functionalities to process date in the cloud
+before downloading only the needed result. The platform provides a Python API, which was used to access the data and process it.
+The code is available on \href{}{GitHub}. The data processing was done for the are of the Kanton of Schaffhausen
+(West: 8.3, South: 47.53, East: 8.9, North: 47.84, ESPG:). 
+
+\section*{Results}
+
+
+\section*{Discussion}
+
+
+\vfill
+\section*{Declaration of AI Assistance}
+ChatGPT was used to solve some problems\\
+GitHub copilot was used to assist while writing the report and coding
+
+
+\end{document}
