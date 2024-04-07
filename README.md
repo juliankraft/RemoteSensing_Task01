@@ -1,4 +1,4 @@
-# Datenauswertung BLH-Projekt-Winter
+# Remote Sensing Assignment Task1
 
 ZURICH UNIVERSITY OF APPLIED SCIENCES <br>
 DEPARTMENT LIFE SCIENCES AND FACILITY MANAGEMENT <br>
