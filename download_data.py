@@ -65,7 +65,6 @@ for year in tqdm(years, desc='Downloading data'):
         scl_band = datacube.band('SCL')
         mask = (scl_band != 4)
 
-        # Before we can apply this mask to the EVI cube we have to resample it, as the “SCL” layer has a “ground sample distance” of 20 meter, while it is 10 meter for the “B02”, “B04” and “B08” bands. We can easily do the resampling by referring directly to the EVI cube.
         # Resample the EVI cube to the spatial resolution of the mask (SCL band has a resolution of 20m, B04 and B08 have a resolution of 10m)
         evi_cube_resampled = evi_cube.resample_cube_spatial(mask)
 
@@ -74,3 +73,4 @@ for year in tqdm(years, desc='Downloading data'):
 
         # Download the reprojected data cube
         evi_cube_masked.download(f'data/NDVI_test/ndvi_sh_{year}{month}.nc')
+        
