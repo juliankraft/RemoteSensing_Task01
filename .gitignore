@@ -5,6 +5,8 @@ archive/
 data/
 
 # LaTeX files to ignore
+*.bcf
+
 *.aux
 *.bbl
 *.blg
@@ -31,7 +33,6 @@ data/
 *.vrb
 *.dvi
 *.pdfsync
-*.pdf
 *.ps
 *.ent
 *.lox
