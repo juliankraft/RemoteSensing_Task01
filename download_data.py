@@ -29,7 +29,7 @@ connection.describe_collection('SENTINEL2_L2A')
 connection.authenticate_oidc()
 
 # defining the spatial and temporal extent
-years = [str(y) for y in range(2018, 2024)]
+years = [str(y) for y in range(2017, 2024)]
 months = [str(y).zfill(2) for y in range(6, 9)]
 west = 8.3
 south = 47.53

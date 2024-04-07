@@ -54,7 +54,7 @@
 
 
 %%%%% Title %%%%%
-\title{NDVI calculation for the Kanton of Schaffhausen using Sentinel-2 data and Python}
+\title{NDVI calculation using Sentinel-2 data and Python}
 
 \begin{document}
 
@@ -84,9 +84,9 @@ where values close to 1 indicate healthy vegetation and values close to -1 indic
 we calculate the NDVI for the Kanton of Schaffhausen using Sentinel-2 satellite data and Python. To solve this task,
 three different Remote Sensing products are used: Sentinel-2 Level-2A data bands B04 (Red) and B08 (NIR) and the
 preprocessed Scene Classification Layer (SCL). In this report the focus is on how the data was obtained and processed
-and how the created NDVI product looks like for a single time frame.
+and how the created NDVI product looks like for a single time frame.\\
 
-In next step, namely task 2, the Idea is to analyze the data over time. The NDVI for itself provides limited information
+For the next step, namely task 2, the Idea is to analyze the data over time. The NDVI for itself provides limited information
 about the actual vegetation health and growth, since the values are relative. Therefore, the plan is to calculate the 
 deviation from the mean NDVI over the whole time frame for each pixel on every time frame. 
 
@@ -96,19 +96,44 @@ deviation from the mean NDVI over the whole time frame for each pixel on every t
 To process and download the data, the \href{https://openeo.dataspace.copernicus.eu/}{OpenEO} platform was used. There is a
 great advantage in using platforms like this, since they provide a lot of functionalities to process date in the cloud
 before downloading only the needed result. The platform provides a Python API, which was used to access the data and process it.
-The code is available on \href{https://github.com/juliankraft/RemoteSensing_Task01}{GitHub}. The data processing was done for the are of the Kanton of Schaffhausen
-(West: 8.3, South: 47.53, East: 8.9, North: 47.84, ESPG:). 
+The code is available on \href{https://github.com/juliankraft/RemoteSensing_Task01}{GitHub}. 
+The data processing was done for the area of the Kanton of Schaffhausen in Switzerland. The area is defined by the bounding box
+(West: 8.3, South: 47.53, East: 8.9, North: 47.84, ESPG:4326). 
+The temporal extent covers the summer months (June, July, August) of the years 2017 to 2023. Only frames with less than 85\% 
+cloud cover were used.\\
+
+The NDVI was calculated using the following formula \autocite{ndvi_sentinelhub}:
+
+\begin{equation}
+    NDVI = \frac{NIR - RED}{NIR + RED}
+\end{equation}\\
+
+After calculating the NDVI, the values were masked using the SCL layer. All pixels not classified as vegetation were set to not 
+available (NA) in order for them not to be considered in the analysis. This solves the problem of having NDVI values for clouds as well
+as NDVI values for water bodies, urban areas, etc. The final NDVI product was then downloaded as Data Cube with the dimensions
+time, x, y and the coordinate system ESPG:32632. The data cube was saved as a NetCDF file.\\
 
 \section*{Results}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{ndvi_plot.pdf}
+  \caption{Plot of the NDVI for the Kanton of Schaffhausen for a single time frame. The values range from -1 to 1. The red line represents the boarder of the Kanton.}
+  \label{fig:ndvi_plot}
+\end{figure}
 
 
 \section*{Discussion}
 
 
 \vfill
+% declare AI assistance
 \section*{Declaration of AI Assistance}
 ChatGPT was used to solve some problems\\
 GitHub copilot was used to assist while writing the report and coding
 
+% print used references
+
+\printbibliography
 
 \end{document}
