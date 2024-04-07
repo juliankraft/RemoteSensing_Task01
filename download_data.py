@@ -2,6 +2,7 @@
 import openeo
 from tqdm import tqdm
 
+# defining functions to handle Months lengths considering leap years
 def is_leap_year(year):
     """Returns True if the given year is a leap year, False otherwise."""
     return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
@@ -29,8 +30,8 @@ connection.describe_collection('SENTINEL2_L2A')
 connection.authenticate_oidc()
 
 # defining the spatial and temporal extent
-years = [str(y) for y in range(2017, 2024)]
-months = [str(y).zfill(2) for y in range(6, 9)]
+years = [str(y) for y in range(2017, 2024)] # end year not included
+months = [str(y).zfill(2) for y in range(6, 9)] # end month not included
 west = 8.3
 south = 47.53
 east = 8.9
@@ -73,4 +74,3 @@ for year in tqdm(years, desc='Downloading data'):
 
         # Download the reprojected data cube
         evi_cube_masked.download(f'data/NDVI_test/ndvi_sh_{year}{month}.nc')
-        
