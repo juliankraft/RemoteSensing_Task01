@@ -26,4 +26,4 @@ conda create -n geodata_env -c conda-forge python=3 netcdf4 xarray matplotlib nu
 ```
 
 ## Data Visualisation
-The data visualisation is done in the Jupyter Notebook file `visualisation.ipynb`.
+The data visualization is done in the Jupyter Notebook file visualization.ipynb.
